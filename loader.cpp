@@ -12,3 +12,13 @@ Loader::~Loader()
 {
     delete ui;
 }
+
+void Loader::on_btnLock_clicked()
+{
+}
+
+
+void Loader::on_btnUnlock_clicked()
+{
+}
+

@@ -10,6 +10,7 @@ NokiaManager::NokiaManager(QWidget *parent)
     ui->setupUi(this);
 
     load = new Loader;
+    root = new Root;
 }
 
 NokiaManager::~NokiaManager()
@@ -23,5 +24,11 @@ NokiaManager::~NokiaManager()
 void NokiaManager::on_btnLoader_clicked()
 {
     load->show();
+}
+
+
+void NokiaManager::on_btnRoot_clicked()
+{
+    root->show();
 }
 

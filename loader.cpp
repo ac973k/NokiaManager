@@ -55,12 +55,12 @@ void Loader::on_btnUnlock_clicked()
         delete msgBox;
     }
 
-    QMessageBox *msgBoxA = new QMessageBox(QMessageBox::Information, "Loader Unlock", "Следуйте инструкциям на экране телефона...",
+    QMessageBox *msgBoxA = new QMessageBox(QMessageBox::Information, "Loader Unlock", "Следуйте инструкциям на экране телефона... После этого, нажмите OK",
     QMessageBox::Ok);
     if(msgBoxA->exec() == QMessageBox::Ok)
     {
         proc->start("tools\\fastboot.exe", QStringList() << "oem" << "unlock-go");
-        ui->textBrowser->append("Root...");
+        ui->textBrowser->append("Unlock...");
 
         delete msgBoxA;
     }

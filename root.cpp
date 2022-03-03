@@ -17,6 +17,8 @@ Root::Root(QWidget *parent) :
 Root::~Root()
 {
     delete ui;
+
+    delete proc;
 }
 
 void Root::on_btnRoot_clicked()

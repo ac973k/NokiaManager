@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <QProcess>
+
 namespace Ui {
 class Loader;
 }
@@ -22,6 +24,8 @@ private slots:
 
 private:
     Ui::Loader *ui;
+
+    QProcess *proc;
 };
 
 #endif // LOADER_H

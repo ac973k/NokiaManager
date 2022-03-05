@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include "loader.h"
+#include "root.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class NokiaManager; }
@@ -20,9 +21,12 @@ public:
 private slots:
     void on_btnLoader_clicked();
 
+    void on_btnRoot_clicked();
+
 private:
     Ui::NokiaManager *ui;
 
     Loader *load;
+    Root *root;
 };
 #endif // NOKIAMANAGER_H

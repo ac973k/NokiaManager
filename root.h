@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <QProcess>
+
 namespace Ui {
 class Root;
 }
@@ -15,8 +17,13 @@ public:
     explicit Root(QWidget *parent = nullptr);
     ~Root();
 
+private slots:
+    void on_btnRoot_clicked();
+
 private:
     Ui::Root *ui;
+
+    QProcess *proc;
 };
 
 #endif // ROOT_H

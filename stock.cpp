@@ -5,6 +5,8 @@
 #include <QFile>
 #include <QDir>
 
+#include <QMessageBox>
+
 Stock::Stock(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Stock)
@@ -12,6 +14,8 @@ Stock::Stock(QWidget *parent) :
     ui->setupUi(this);
 
     path = "Android";
+
+    proc = new QProcess;
 
     QDir dir(path);
     if (!dir.exists())
@@ -24,6 +28,9 @@ Stock::Stock(QWidget *parent) :
 
 Stock::~Stock()
 {
+    delete managerDownload;
+    delete proc;
+
     delete ui;
 }
 
@@ -125,8 +132,6 @@ void Stock::onDownloadResult(QNetworkReply *replyD)
 
     ui->textBrowser->append("Загрузка Завершена!");
     ui->textBrowser->append("Файл: " + path + "\\" + replyD->request().url().fileName());
-
-    //delete managerDownload;
 }
 
 void Stock::onProgress(qint64 receivedSize, qint64 totalSize)
@@ -137,6 +142,28 @@ void Stock::onProgress(qint64 receivedSize, qint64 totalSize)
 
 void Stock::on_btnFlash_clicked()
 {
+    QString filename;
 
+    if (ui->boxAndroid->currentText() == "Android 9")
+    {
+        filename = "Android_9";
+    }
+    else if (ui->boxAndroid->currentText() == "Android 10")
+    {
+        filename = "Android_10";
+    }
+    else if (ui->boxAndroid->currentText() == "Android 11")
+    {
+        filename = "Android_11";
+    }
+
+    proc->setProcessChannelMode(QProcess::MergedChannels);
+
+    QObject::connect(proc, &QProcess::readyReadStandardOutput, [this]() {
+        ui->textBrowser->append(proc->readAllStandardOutput());
+      });
+
+    proc->start("tools\\7za.exe", QStringList() << "-oAndroid\\" << "x" << "Android\\" + filename + ".7z");
+    ui->textBrowser->append("Распаковка...");
 }
 

@@ -8,6 +8,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
+#include <QProcess>
+
 namespace Ui {
 class Stock;
 }
@@ -37,6 +39,8 @@ private:
     QFile *uFile;
 
     QNetworkAccessManager *managerDownload;
+
+    QProcess *proc;
 };
 
 #endif // STOCK_H

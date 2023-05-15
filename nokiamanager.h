@@ -5,6 +5,7 @@
 
 #include "loader.h"
 #include "root.h"
+#include "stock.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class NokiaManager; }
@@ -23,10 +24,13 @@ private slots:
 
     void on_btnRoot_clicked();
 
+    void on_btnStock_clicked();
+
 private:
     Ui::NokiaManager *ui;
 
     Loader *load;
     Root *root;
+    Stock *stock;
 };
 #endif // NOKIAMANAGER_H

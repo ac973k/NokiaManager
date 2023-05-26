@@ -15,7 +15,8 @@ Stock::Stock(QWidget *parent) :
 
     path = "Android";
 
-    proc = new QProcess;
+    procUnpack = new QProcess;
+    procFlash = new QProcess;
 
     QDir dir(path);
     if (!dir.exists())
@@ -29,7 +30,8 @@ Stock::Stock(QWidget *parent) :
 Stock::~Stock()
 {
     delete managerDownload;
-    delete proc;
+    delete procFlash;
+    delete procUnpack;
 
     delete ui;
 }
@@ -157,13 +159,26 @@ void Stock::on_btnFlash_clicked()
         filename = "Android_11";
     }
 
-    proc->setProcessChannelMode(QProcess::MergedChannels);
+    procUnpack->setReadChannel(QProcess::StandardOutput);
+    procUnpack->setProcessChannelMode(QProcess::MergedChannels);
 
-    QObject::connect(proc, &QProcess::readyReadStandardOutput, [this]() {
-        ui->textBrowser->append(proc->readAllStandardOutput());
-      });
-
-    proc->start("tools\\7za.exe", QStringList() << "-oAndroid\\" << "x" << "Android\\" + filename + ".7z");
     ui->textBrowser->append("Распаковка...");
+
+    QObject::connect(procUnpack, &QProcess::readyReadStandardOutput, this, [this]() {
+        ui->textBrowser->append(procUnpack->readLine());
+    });
+
+    procUnpack->start("tools\\7za.exe", QStringList() << "-oAndroid\\" << "x" << "Android\\" + filename + ".7z");
+
+    ui->textBrowser->append("Прошивка...");
+
+    QObject::connect(procFlash, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                     this, [this, filename]() {
+        procFlash->start("Android\\" + filename + "\\fastboot.exe", QStringList() << "wait-for-device" << "&&" << "Android\\" + filename + "\\flash_all.bat");
+
+        QObject::connect(procFlash, &QProcess::readyReadStandardOutput, this, [this]() {
+            ui->textBrowser->append(procFlash->readLine());
+        });
+                     });
 }
 

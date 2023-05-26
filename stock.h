@@ -40,7 +40,8 @@ private:
 
     QNetworkAccessManager *managerDownload;
 
-    QProcess *proc;
+    QProcess *procUnpack;
+    QProcess *procFlash;
 };
 
 #endif // STOCK_H

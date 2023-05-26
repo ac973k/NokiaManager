@@ -13,12 +13,14 @@ NokiaManager::NokiaManager(QWidget *parent)
     root = new Root;
     stock = new Stock;
     stockGSI = new StockGSI;
+    advanced = new Advanced;
 }
 
 NokiaManager::~NokiaManager()
 {
     delete ui;
 
+    delete advanced;
     delete stockGSI;
     delete stock;
     delete root;
@@ -47,5 +49,11 @@ void NokiaManager::on_btnStock_clicked()
 void NokiaManager::on_btnCustom_clicked()
 {
     stockGSI->show();
+}
+
+
+void NokiaManager::on_btnAdvanced_clicked()
+{
+    advanced->show();
 }
 

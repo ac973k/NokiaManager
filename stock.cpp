@@ -190,7 +190,7 @@ void Stock::on_btnFlash_clicked()
 
     procUnpack->start("tools\\7za.exe", QStringList() << "-oAndroid\\" << "x" << "Android\\" + filename + ".7z");
     procUnpack->waitForStarted();
-    connect(procUnpack, &QProcess::finished, this, [this, batFilePath]() {
+    QObject::connect(procUnpack, &QProcess::finished, this, [this, batFilePath]() {
         procFlash->start("cmd.exe", QStringList() << "/c" << batFilePath);
     });
     procFlash->waitForFinished();

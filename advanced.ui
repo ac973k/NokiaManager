@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Advanced</class>
+ <widget class="QWidget" name="Advanced">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>370</width>
+    <height>397</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Advanced</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QComboBox" name="boxPart">
+         <item>
+          <property name="text">
+           <string>aboot</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>boot</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>cmnlib</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>cmnlib64</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>custom</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>devcfg</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>dsp</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>dtbo</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>keymaster</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>mdtp</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>modem</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>picture</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>rpm</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>sbll</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>splash</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>system</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>tz</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>vbmeta</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>vendor</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnFlash">
+         <property name="text">
+          <string>Flash</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="checkCurrentSlot">
+         <property name="text">
+          <string>Current SLOT</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QCheckBox" name="checkA">
+           <property name="text">
+            <string>_A</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkB">
+           <property name="text">
+            <string>_B</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="textLog">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

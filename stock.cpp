@@ -6,6 +6,7 @@
 #include <QDir>
 
 #include <QMessageBox>
+#include <QTextCodec>
 
 Stock::Stock(QWidget *parent) :
     QWidget(parent),
@@ -159,26 +160,43 @@ void Stock::on_btnFlash_clicked()
         filename = "Android_11";
     }
 
-    procUnpack->setReadChannel(QProcess::StandardOutput);
     procUnpack->setProcessChannelMode(QProcess::MergedChannels);
 
-    ui->textBrowser->append("Распаковка...");
+    procFlash->setProcessChannelMode(QProcess::MergedChannels);
+    QString appDirPath = QCoreApplication::applicationDirPath();
+    QString batFilePath = appDirPath + "/Android/"+ filename +"/flash_all.bat";
+    QString batFileDirPath = QFileInfo(batFilePath).absolutePath();
+    procFlash->setWorkingDirectory(batFileDirPath);
+
+    ui->textBrowser->append(batFilePath);
 
     QObject::connect(procUnpack, &QProcess::readyReadStandardOutput, this, [this]() {
-        ui->textBrowser->append(procUnpack->readLine());
+        while (procUnpack->canReadLine()) {
+            QByteArray BA = procUnpack->readLine();
+            QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+            QString line = codec->toUnicode(BA.data());
+            ui->textBrowser->append(line);
+        }
+    });
+
+    QObject::connect(procFlash, &QProcess::readyReadStandardOutput, this, [this]() {
+        while (procFlash->canReadLine()) {
+            QByteArray BA = procFlash->readLine();
+            QTextCodec *codec = QTextCodec::codecForName("Windows-1251");
+            QString line = codec->toUnicode(BA.data());
+            ui->textBrowser->append(line);
+        }
     });
 
     procUnpack->start("tools\\7za.exe", QStringList() << "-oAndroid\\" << "x" << "Android\\" + filename + ".7z");
+    procUnpack->waitForStarted();
+    connect(procUnpack, &QProcess::finished, this, [this, batFilePath]() {
+        procFlash->start("cmd.exe", QStringList() << "/c" << batFilePath);
+    });
+    procFlash->waitForFinished();
 
-    ui->textBrowser->append("Прошивка...");
 
-    QObject::connect(procFlash, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
-                     this, [this, filename]() {
-        procFlash->start("Android\\" + filename + "\\fastboot.exe", QStringList() << "wait-for-device" << "&&" << "Android\\" + filename + "\\flash_all.bat");
 
-        QObject::connect(procFlash, &QProcess::readyReadStandardOutput, this, [this]() {
-            ui->textBrowser->append(procFlash->readLine());
-        });
-                     });
+
 }
 

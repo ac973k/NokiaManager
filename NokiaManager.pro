@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    about.cpp \
     advanced.cpp \
     loader.cpp \
     main.cpp \
@@ -18,6 +19,7 @@ SOURCES += \
     stockgsi.cpp
 
 HEADERS += \
+    about.h \
     advanced.h \
     loader.h \
     nokiamanager.h \
@@ -26,6 +28,7 @@ HEADERS += \
     stockgsi.h
 
 FORMS += \
+    about.ui \
     advanced.ui \
     loader.ui \
     nokiamanager.ui \

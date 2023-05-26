@@ -8,6 +8,7 @@
 #include "stock.h"
 #include "stockgsi.h"
 #include "advanced.h"
+#include "about.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class NokiaManager; }
@@ -32,6 +33,8 @@ private slots:
 
     void on_btnAdvanced_clicked();
 
+    void on_btnAbout_clicked();
+
 private:
     Ui::NokiaManager *ui;
 
@@ -40,5 +43,6 @@ private:
     Stock *stock;
     StockGSI *stockGSI;
     Advanced *advanced;
+    About *about;
 };
 #endif // NOKIAMANAGER_H

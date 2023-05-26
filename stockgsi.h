@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <QProcess>
+
 namespace Ui {
 class StockGSI;
 }
@@ -15,8 +17,14 @@ public:
     explicit StockGSI(QWidget *parent = nullptr);
     ~StockGSI();
 
+private slots:
+    void on_btnFlash_clicked();
+
 private:
     Ui::StockGSI *ui;
+
+    QProcess *procDisableAuth;
+    QProcess *procFlash;
 };
 
 #endif // STOCKGSI_H
